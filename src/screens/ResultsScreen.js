@@ -53,7 +53,10 @@ const ResultsScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView 
+        style={styles.scrollContainer}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Resultados del Análisis</Text>
           <View style={styles.modeloBadge}>
@@ -102,7 +105,16 @@ const ResultsScreen = ({ route, navigation }) => {
           <Text style={styles.interpretacionTexto}>
             • El tiempo promedio de espera en el sistema es de {resultados.W} unidades de tiempo.
           </Text>
+          <Text style={styles.interpretacionTexto}>
+            • El tiempo promedio de espera en cola es de {resultados.Wq} unidades de tiempo.
+          </Text>
+          <Text style={styles.interpretacionTexto}>
+            • La probabilidad de encontrar el sistema vacío es {resultados.P0}.
+          </Text>
         </View>
+
+        {/* Espacio extra para que no se superpongan los botones */}
+        <View style={styles.spacer} />
       </ScrollView>
 
       {/* Botones fijos en la parte inferior */}
@@ -139,6 +151,9 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 20,
   },
   header: {
     backgroundColor: '#3498db',
@@ -210,13 +225,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderLeftWidth: 4,
     borderLeftColor: '#ffc107',
-    marginBottom: 100,
   },
   interpretacionTexto: {
     fontSize: 14,
     color: '#856404',
     lineHeight: 22,
     marginBottom: 8,
+  },
+  spacer: {
+    height: 180,
   },
   buttonContainer: {
     position: 'absolute',
